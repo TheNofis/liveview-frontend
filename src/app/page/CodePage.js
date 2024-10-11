@@ -8,6 +8,7 @@ export default function CodePage({ socket }) {
 
   socket.on("filesContent", setCodeData);
   socket.on("filesUpdate", (data) => {
+    if (codeData == null) return;
     Object.keys(data).forEach((key) => {
       const dataNow = JSON.parse(JSON.stringify(codeData));
       dataNow[key] = data[key];
