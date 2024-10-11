@@ -1,12 +1,21 @@
-export default function Header({ username }) {
+import { useState } from "react";
+
+export default function Header({ socket }) {
+  const [userData, setUserData] = useState(null);
+  const [userList, setUserList] = useState(null);
+
+  socket.on("userList", setUserList);
+  socket.on("userData", setUserData);
   return (
     <header className="header">
       <div className="header__name">LiveServer</div>
       <div className="header__profile">
-        {username ? (
+        {userData?.username ? (
           <>
-            <div className="header__profile__avatar">{username[0]}</div>
-            <span className="header__profile__name">{username}</span>
+            <div className="header__profile__avatar">
+              {userData?.username[0]}
+            </div>
+            <span className="header__profile__name">{userData?.username}</span>
           </>
         ) : (
           <></>
