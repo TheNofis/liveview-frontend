@@ -1,14 +1,13 @@
 import CodeBlockList from "../components/CodeBlockList";
 
-import { useRef } from "react";
+import { useRef, useState } from "react";
 
 export default function CodePage({ socket }) {
   const [codeData, setCodeData] = useState(null);
   const iframe = useRef(null);
 
-  socket.on("fileContent", (data) => {
-    if (codeData == null) return setCodeData(data);
-
+  socket.on("filesContent", setCodeData);
+  socket.on("filesUpdate", (data) => {
     Object.keys(data).forEach((key) => {
       const dataNow = JSON.parse(JSON.stringify(codeData));
       dataNow[key] = data[key];

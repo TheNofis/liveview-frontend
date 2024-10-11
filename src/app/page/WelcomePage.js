@@ -1,12 +1,14 @@
 import { useState } from "react";
 
-export default function WelcomePage({ socket }) {
+export default function WelcomePage({ socket, setAuth }) {
   const [inputValue, setInputValue] = useState();
 
   const handleSubmit = (e) => {
     e.preventDefault();
     socket.emit("setUsername", inputValue);
   };
+
+  socket.on("userData", () => setAuth(true));
 
   return (
     <form className="welcome">
@@ -18,7 +20,7 @@ export default function WelcomePage({ socket }) {
         onChange={(e) => setInputValue(e.target.value)}
         required
       />
-      <button className="welcome__button" onClick={handleSubmit}>
+      <button className="btn welcome__button" onClick={handleSubmit}>
         Войти
       </button>
     </form>
