@@ -6,13 +6,19 @@ oneDark[`pre[class*="language-"]`].margin = 0;
 
 export default function CodeBlock({ code, language }) {
   const codeblock = useRef(null);
+  const fullscreenButton = useRef(null);
 
-  const fullscreen = () => {
+  const fullscreen = (e) => {
     codeblock.current.classList.toggle("fullscreen-window");
+    fullscreenButton.current.classList.toggle("fullscreen-active");
   };
   return (
     <div className="codeblock" ref={codeblock}>
-      <button onClick={fullscreen} className="fullscreen">
+      <button
+        onClick={fullscreen}
+        className="fullscreen"
+        ref={fullscreenButton}
+      >
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="24"

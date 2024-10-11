@@ -117,9 +117,14 @@ iframe {
   font-weight: bold;
 
   border-radius: 50%;
+
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.header__connlist__user:hover {
+  transform: scale(1.2);
 }
 .avatar-yellow {
   background-color: var(--yellow);
@@ -129,8 +134,11 @@ iframe {
 }
 .header__connlist__user {
   cursor: pointer;
+
   width: 30px;
   height: 30px;
+  animation: emergence 2s;
+  transition: 0.4s;
 }
 .header__connlist {
   display: flex;
@@ -200,9 +208,15 @@ iframe {
   border-radius: 10px;
   transition: 0.4s;
 }
+.fullscreen-active {
+  transform: scale(1.2);
+}
 .fullscreen:hover {
   color: var(--blue1);
   transform: scale(1.2);
+}
+.fullscreen-active:hover {
+  transform: scale(1);
 }
 .fullscreen:focus {
   outline: none;
@@ -217,4 +231,13 @@ iframe {
   width: 100vw;
   height: 100vh;
   position: absolute;
+}
+
+@keyframes emergence {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
