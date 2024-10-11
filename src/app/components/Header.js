@@ -6,21 +6,38 @@ export default function Header({ socket }) {
 
   socket.on("userList", setUserList);
   socket.on("userData", setUserData);
+
   return (
     <header className="header">
-      <div className="header__name">LiveServer</div>
-      <div className="header__info">
-        <div className="header__connlist">
-          {userList != null
-            ? userList.map((user) => (
-                <div className="header__connlist__user" key={user.id}>
-                  {user?.username[0]}
-                </div>
-              ))
-            : null}
-        </div>
-        <div className="header__profile">
-          {userData?.username ? (
+      <div className="header__name">LiveView</div>
+      {userData?.username ? (
+        <div className="header__info">
+          <div className="header__connlist">
+            {userList != null
+              ? userList.map((user) =>
+                  user?.username ? (
+                    user?.username === userData?.username ? (
+                      <div
+                        className="header__connlist__user avatar-green"
+                        key={user.username}
+                      >
+                        {user?.username}
+                      </div>
+                    ) : (
+                      <div
+                        className="header__connlist__user avatar-yellow"
+                        key={user.username}
+                      >
+                        {user?.username[0]}
+                      </div>
+                    )
+                  ) : (
+                    <></>
+                  ),
+                )
+              : null}
+          </div>
+          <div className="header__profile">
             <>
               <div className="header__profile__avatar">
                 {userData?.username[0]}
@@ -29,11 +46,11 @@ export default function Header({ socket }) {
                 {userData?.username}
               </span>
             </>
-          ) : (
-            <></>
-          )}
+          </div>
         </div>
-      </div>
+      ) : (
+        <></>
+      )}
     </header>
   );
 }
