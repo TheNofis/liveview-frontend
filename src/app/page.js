@@ -3,23 +3,22 @@
 import { useEffect, useState, useRef } from "react";
 import { io } from "socket.io-client";
 
-import Welcome from "./components/Welcome";
 import Header from "./components/Header";
-import CodeBlockList from "./components/CodeBlockList";
+
+import CodePage from "./page/CodePage";
+import WelcomePage from "./page/WelcomePage";
 
 export default function Home() {
   const [socket, setSocket] = useState(io("localhost:3001"));
   const [codeData, setCodeData] = useState(null);
-  const [username, setUsername] = useState("hi");
+  const [conectionInfo, setConnectionInfo] = useState(null);
   const [userData, setUserData] = useState(null);
 
   const iframe = useRef(null);
 
   useEffect(() => {
-    socket.on("connect", () => {
-      socket.emit("clientConnect", socket.id);
-      console.log("connect");
-    });
+    socket.on("connect", () => socket.emit("registerClient", socket.id));
+    socket.on("connectInfo", (data) => setConnectionInfo(data));
 
     socket.on("fileContent", (data) => {
       if (codeData == null) return setCodeData(data);
@@ -29,31 +28,23 @@ export default function Home() {
         dataNow[key] = data[key];
         setCodeData(dataNow);
 
-        // Update iframe code
+        // Update iframe page
         if (!iframe?.current?.contentWindow?.location) return;
         iframe.current.src += "";
       });
     });
-    socket.on("connectInfo", (data) => {
-      setUserData(data);
-    });
+    socket.on("userData", (data) => setUserData(data));
   });
 
   return (
     <div className="container">
-      <Header username={username} />
+      <Header username={userData?.username} />
 
-      <div className="codeblock-list">
-        {codeData != null ? <CodeBlockList codeData={codeData} /> : <></>}
-      </div>
-      <div class="iframe">
-        <iframe
-          src="http://localhost:3002"
-          ref={iframe}
-          width="100%"
-          height="100%"
-        />
-      </div>
+      {userData == null && socket != null ? (
+        <WelcomePage socket={socket} />
+      ) : (
+        <CodePage codeData={codeData} username={userData?.username} />
+      )}
     </div>
   );
 }
