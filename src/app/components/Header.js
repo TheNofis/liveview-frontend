@@ -16,21 +16,19 @@ export default function Header({ socket }) {
             {userList != null
               ? userList.map((user) =>
                   user?.username ? (
-                    user?.username === userData?.username ? (
-                      <div
-                        className="header__connlist__user avatar-green"
-                        key={user.username}
-                      >
-                        {user?.username[0]}
-                      </div>
-                    ) : (
-                      <div
-                        className="header__connlist__user avatar-yellow"
-                        key={user.username}
-                      >
-                        {user?.username[0]}
-                      </div>
-                    )
+                    <div
+                      className={
+                        "header__connlist__user" +
+                        (user?.username == userData?.username
+                          ? " avatar-green"
+                          : " avatar-yellow")
+                      }
+                      key={`userlist ${user.username}`}
+                    >
+                      {user?.username[0] != userData?.username[0]
+                        ? user?.username[0]
+                        : "you"}
+                    </div>
                   ) : (
                     <></>
                   ),
