@@ -14,8 +14,6 @@ export default function Home() {
   const [conectionInfo, setConnectionInfo] = useState(null);
   const [userData, setUserData] = useState(null);
 
-  const iframe = useRef(null);
-
   useEffect(() => {
     socket.on("connect", () => socket.emit("registerClient", socket.id));
     socket.on("connectInfo", (data) => setConnectionInfo(data));
@@ -42,8 +40,10 @@ export default function Home() {
 
       {userData == null && socket != null ? (
         <WelcomePage socket={socket} />
-      ) : (
+      ) : codeData != null ? (
         <CodePage codeData={codeData} username={userData?.username} />
+      ) : (
+        <></>
       )}
     </div>
   );

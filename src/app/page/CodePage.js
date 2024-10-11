@@ -1,6 +1,9 @@
 import CodeBlockList from "../components/CodeBlockList";
 
-export default function CodePage() {
+import { useRef } from "react";
+
+export default function CodePage({ codeData }) {
+  const iframe = useRef(null);
   return (
     <>
       <div className="codeblock-list">
