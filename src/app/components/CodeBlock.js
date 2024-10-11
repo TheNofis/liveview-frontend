@@ -8,7 +8,7 @@ export default function CodeBlock({ code, language }) {
   const codeblock = useRef(null);
 
   const fullscreen = () => {
-    codeblock.current.classList.toggle("fullscreen-size");
+    codeblock.current.classList.toggle("fullscreen-window");
   };
   return (
     <div className="codeblock" ref={codeblock}>
