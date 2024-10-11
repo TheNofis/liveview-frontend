@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState } from "react";
 import { io } from "socket.io-client";
 
 import Header from "./components/Header";
@@ -9,8 +9,9 @@ import CodePage from "./page/CodePage";
 import WelcomePage from "./page/WelcomePage";
 
 export default function Home() {
-  const [socket, setSocket] = useState(io("localhost:3001"));
+  const [socket] = useState(io("localhost:3001"));
   const [conectionInfo, setConnectionInfo] = useState(null);
+  const [auth, setAuth] = useState(false);
 
   useEffect(() => {
     socket.on("connect", () => socket.emit("registerClient", socket.id));
@@ -21,12 +22,10 @@ export default function Home() {
     <div className="container">
       <Header socket={socket} />
 
-      {socket != null ? (
-        <WelcomePage socket={socket} />
-      ) : codeData != null ? (
+      {auth ? (
         <CodePage socket={socket} />
       ) : (
-        <></>
+        <WelcomePage socket={socket} setAuth={setAuth} />
       )}
     </div>
   );
