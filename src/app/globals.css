@@ -141,11 +141,17 @@ iframe {
 }
 
 .welcome {
-  width: 25vw;
-  height: 20vh;
+  position: absolute;
 
-  min-width: 300px;
-  min-height: 200px;
+  width: 40%;
+  height: 220px;
+
+  max-width: 350px;
+  min-width: 200px;
+
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -150%);
 
   display: flex;
   flex-direction: column;
