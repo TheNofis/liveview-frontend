@@ -93,6 +93,9 @@ iframe {
   font-size: 24px;
   font-weight: bold;
 }
+.header__info {
+  display: flex;
+}
 
 .header__profile {
   display: flex;
@@ -102,7 +105,8 @@ iframe {
   cursor: pointer;
 }
 
-.header__profile__avatar {
+.header__profile__avatar,
+.header__connlist__user {
   width: 40px;
   height: 40px;
 
@@ -115,10 +119,25 @@ iframe {
   align-items: center;
   justify-content: center;
 }
+.header__connlist__user {
+  width: 30px;
+  height: 30px;
+}
+.header__connlist {
+  display: flex;
+  align-items: center;
+  border: 2px solid var(--white);
+  border-radius: 100px;
+  padding: 5px 15px;
+  gap: 10px;
+}
 
 .welcome {
   width: 25vw;
   height: 20vh;
+
+  min-width: 300px;
+  min-height: 200px;
 
   display: flex;
   flex-direction: column;
