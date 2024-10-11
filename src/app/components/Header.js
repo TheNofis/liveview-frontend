@@ -21,7 +21,7 @@ export default function Header({ socket }) {
                         className="header__connlist__user avatar-green"
                         key={user.username}
                       >
-                        {user?.username}
+                        {user?.username[0]}
                       </div>
                     ) : (
                       <div
