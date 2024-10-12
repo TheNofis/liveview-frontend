@@ -22,9 +22,7 @@ export default function Header({ socket }) {
                       creator={user?.creator}
                       creatorName={userData?.username}
                     />
-                  ) : (
-                    <></>
-                  ),
+                  ) : null,
                 )
               : null}
           </div>
