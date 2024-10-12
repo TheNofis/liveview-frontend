@@ -133,6 +133,7 @@ iframe {
   background-color: var(--green);
 }
 .header__connlist__user {
+  position: relative;
   cursor: pointer;
 
   width: 30px;
@@ -148,6 +149,11 @@ iframe {
   padding: 5px 15px;
   gap: 10px;
   margin-right: 20px;
+}
+.header__connlist__user__creator {
+  position: absolute;
+  top: -20px;
+  color: var(--yellow);
 }
 
 .welcome {

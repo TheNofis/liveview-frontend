@@ -1,4 +1,5 @@
 import { useState } from "react";
+import HeaderUser from "./HeaderUser";
 
 export default function Header({ socket }) {
   const [userData, setUserData] = useState(null);
@@ -16,19 +17,11 @@ export default function Header({ socket }) {
             {userList != null
               ? userList.map((user) =>
                   user?.username ? (
-                    <div
-                      className={
-                        "header__connlist__user" +
-                        (user?.username == userData?.username
-                          ? " avatar-green"
-                          : " avatar-yellow")
-                      }
-                      key={`userlist ${user.username}`}
-                    >
-                      {user?.username[0] != userData?.username[0]
-                        ? user?.username[0]
-                        : "you"}
-                    </div>
+                    <HeaderUser
+                      username={user?.username}
+                      creator={user?.creator}
+                      creatorName={userData?.username}
+                    />
                   ) : (
                     <></>
                   ),
