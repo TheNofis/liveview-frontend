@@ -27,7 +27,7 @@ export default function CodePage({ socket }) {
       </div>
       <div className="iframe">
         <iframe
-          src="http://localhost:3002"
+          src="http://localhost:3002/index.html"
           ref={iframe}
           width="100%"
           height="100%"
