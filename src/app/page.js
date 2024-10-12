@@ -14,7 +14,7 @@ export default function Home() {
   const [auth, setAuth] = useState(false);
 
   useEffect(() => {
-    socket.on("connect", () => socket.emit("registerClient", socket.id));
+    socket.on("connect", () => socket.emit("registerConnection", socket.id));
     socket.on("connectInfo", setConnectionInfo);
   });
 
